@@ -104,6 +104,47 @@ public class Main {
     }
 }
 ```
+- 正十进制小数m转为n进制小数
+    - 编写程序实现任意十进制正小数m转换成n进制的正小数，小数点后保留10位小数。
+    - 输入包含两个数m，n，用空格隔开。输入包含多组测试，当m，n都为0时输入结束。
+```java
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		StringBuffer sb = new StringBuffer();
+		//把所有的answer都存入字符串缓冲池，一次性输出。
+		while(true){
+			double m = sc.nextDouble();	//接收的m是小数	
+			int n = sc.nextInt();//要转化为n进制，是整数
+			if((m == 0)&&(n == 0)) {//若都为0时，输出字符串缓冲池的全部内容
+				System.out.print(sb);
+				break;//并停止
+			}
+			sb.append("0.");
+			for(int i : getm(m,n)) {
+				sb.append(String.valueOf(i));//将int型转换为String类型。
+			}
+			sb.append("\n");
+		}
+
+	}
+	private static int[] getm(Double m,int p){
+		Double n = (double)p;//将in型强制转换为double类型，为下面的乘法作准备
+		int[] T = new int[10];//因为小数点后要保留十位小数		
+		for(int index = 0;index < 10;index++) {
+			m = n*m;//不能让int*double，会转成int
+			int i  = new Double(m).intValue();//double类型强制转换成int类型的写法。不能强制转换。
+			T[index] = i;
+			if(m >= 1.0) {
+				m = m - i;
+			}
+		}
+		return T;//返回的是一个int数组
+	}
+}
+```
 
 6. 质数因子
 ```java
@@ -1046,6 +1087,18 @@ public class Main {
 ```
 
 30. 字符串合并处理【TODO】
+- 题目描述
+    - 按照指定规则对输入的字符串进行处理。
+- 详细描述：
+    - 将输入的两个字符串合并。
+    - 对合并后的字符串进行排序，要求为：下标为奇数的字符和下标为偶数的字符分别从小到大排序。这里的下标意思是字符在字符串中的位置。
+    - 对排序后的字符串进行操作，如果字符为‘0’——‘9’或者‘A’——‘F’或者‘a’——‘f’，则对他们所代表的16进制的数进行BIT倒序的操作，并转换为相应的大写字符。如字符为‘4’，为0100b，则翻转后为0010b，也就是2。转换后的字符为‘2’； 如字符为‘7’，为0111b，则翻转后为1110b，也就是e。转换后的字符为大写‘E’。
+    - 举例：输入str1为"dec"，str2为"fab"，合并为“decfab”，分别对“dca”和“efb”进行排序，排序后为“abcedf”，转换后为“5D37BF”
+    - 注意本题含有多组样例输入
+- 输入描述:
+    - 本题含有多组样例输入。每组样例输入两个字符串，用空格隔开。
+- 输出描述:
+    - 输出转化后的结果。每组样例输出一行。
 ```java
 import java.util.*;
 import java.io.*;
@@ -1107,6 +1160,315 @@ public class Main{
             }
         }
         return new String(array);
+    }
+}
+```
+
+31. 单词倒排（类似13.句子逆序）
+- 题目描述
+  - 对字符串中的所有单词进行倒排。
+- 说明：
+  - 1、构成单词的字符只有26个大写或小写英文字母；
+  - 2、非构成单词的字符均视为单词间隔符；
+  - 3、要求倒排后的单词间隔符以一个空格表示；如果原字符串中相邻单词间有多个间隔符时，倒排转换后也只允许出现一个空格间隔符；
+  - 4、每个单词最长20个字母；
+- 输入描述:
+  - 输入一行以空格来分隔的句子
+- 输出描述:
+  - 输出句子的逆序
+```java
+import java.util.*;
+
+public class Main {
+
+    public Main() {
+    }
+
+    public String reverse(String str) {
+        // 匹配非字母的字符进行分割
+        String[] words = str.split("[^A-Za-z]");
+        StringBuilder result = new StringBuilder();
+
+        // 逆序添加分割完的单词
+        for (int i = words.length - 1; i >= 0; i--) {
+            result.append(words[i]).append(" ");
+        }
+        return result.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        Main solution = new Main();
+        Scanner in = new Scanner(System.in);
+        while (in.hasNextLine()) {
+            String str = in.nextLine();
+            String res = solution.reverse(str);
+            System.out.println(res);
+        }
+    } 
+}
+```
+```java
+//速度快
+import java.io.*;
+public class Main{
+    public static void main(String[] args) throws Exception {
+        InputStream in = System.in;
+        int available = in.available();
+        char[] arr = new char[available];
+        int off_word = 0;
+        int off_end = arr.length;
+        char c;
+        for(int i = 0; i < available; i++) {
+            c = (char) in.read();
+            if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                arr[off_word++] = c;
+            } else if(off_word > 0) {
+                System.arraycopy(arr, 0, arr, off_end - off_word, off_word);
+                off_end -= off_word + 1;
+                off_word = 0;
+                arr[off_end] = ' ';
+            }
+        }
+        System.out.println(String.valueOf(arr, off_end + 1, arr.length - off_end - 1));
+    }
+}
+```
+
+32. 密码截取
+- 题目描述
+  - Catcher是MCA国的情报员，他工作时发现敌国会用一些对称的密码进行通信，比如像这些ABBA，ABA，A，123321，但是他们有时会在开始或结束时加入一些无关的字符以防止别国破解。比如进行下列变化 ABBA->12ABBA,ABA->ABAKK,123321->51233214　。因为截获的串太长了，而且存在多种可能的情况（abaaab可看作是aba,或baaab的加密形式），Cathcer的工作量实在是太大了，他只能向电脑高手求助，你能帮Catcher找出最长的有效密码串吗？
+- 输入描述:
+    - 输入一个字符串
+- 输出描述:
+    - 返回有效密码串的最大长度
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+
+/**
+ * 以某个元素为中心，向两边扩展，分别计算
+ * 偶数长度的回文最大长度和奇数长度的回文最大长度。
+ * 时间复杂度O(n^2)
+ */
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String s = null;
+        while((s= bf.readLine())!=null){
+            int max = 0;
+            char[] arr = s.toCharArray();
+            for(int i=1;i<arr.length;i++){
+                //寻找以i-1,i为中点偶数长度的回文
+                int low =i-1,high=i;
+                while (low>0&&high<arr.length&&arr[low]==arr[high]){
+                    if(high-low+1>max){
+                        max=high-low+1;
+                    }
+                    low--;
+                    high++;
+                }
+
+                //寻找以i为中心的奇数长度的回文
+                low=i-1;
+                high=i+1;
+                while (low>=0&&high<arr.length&&arr[low]==arr[high]){
+                    if(high-low+1>max){
+                        max = high-low+1;
+                    }
+                    low--;
+                    high++;
+                }
+            }
+            System.out.println(max);
+        }
+
+    }
+}
+
+```
+
+33. 整数与IP地址间的转换
+- 题目描述
+```
+    原理：ip地址的每段可以看成是一个0-255的整数，把每段拆分成一个二进制形式组合起来，然后把这个二进制数转变成
+    一个长整数。
+    举例：一个ip地址为10.0.3.193
+    每段数字             相对应的二进制数
+    10                   00001010
+    0                    00000000
+    3                    00000011
+    193                  11000001
+    
+    组合起来即为：00001010 00000000 00000011 11000001,转换为10进制数就是：167773121，即该IP地址转换后的数字就是它了。
+本题含有多组输入用例，每组用例需要你将一个ip地址转换为整数、将一个整数转换为ip地址。
+输入描述:
+    输入 
+    1 输入IP地址
+    2 输入10进制型的IP地址
+
+输出描述:
+    输出
+    1 输出转换成10进制的IP地址
+    2 输出转换后的IP地址
+```
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+    
+public class Main{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = null;
+        while ((str = br.readLine()) != null) {
+            String[] ip = str.split("\\.");
+            long num = Long.parseLong(br.readLine());
+            //转10进制
+            System.out.println(Long.parseLong(ip[0]) << 24 | Long.parseLong(ip[1]) << 16 |
+                               Long.parseLong(ip[2]) << 8 | Long.parseLong(ip[3]));
+            //转ip地址
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.valueOf((num >> 24) & 255)).append(".").append(String.valueOf((num >> 16) & 255))
+                .append(".").append(String.valueOf((num >> 8) & 255)).append(".").append(String.valueOf(num & 255));
+            System.out.println(sb.toString());
+        }
+    }
+}
+
+```
+
+34. 图片整理
+- 题目描述
+    - Lily上课时使用字母数字图片教小朋友们学习英语单词，每次都需要把这些图片按照大小（ASCII码值从小到大）排列收好。请大家给Lily帮忙，通过C语言解决。
+- 输入描述:
+    - Lily使用的图片包括"A"到"Z"、"a"到"z"、"0"到"9"。输入字母或数字个数不超过1024。
+- 输出描述:
+    - Lily的所有图片按照从小到大的顺序输出
+```java
+import java.util.*;
+import java.io.*;
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = "";
+        while((s=br.readLine())!=null){
+            char[] result = s.toCharArray();
+            Arrays.sort(result);
+            System.out.println(String.valueOf(result));
+        }
+    }
+}
+```
+
+35. 蛇形矩阵
+- 题目描述
+```
+蛇形矩阵是由1开始的自然数依次排列成的一个矩阵上三角形。
+例如，当输入5时，应该输出的三角形为：
+1 3 6 10 15
+2 5 9 14
+4 8 13
+7 12
+11
+输入描述:
+    输入正整数N（N不大于100）
+输出描述:
+    输出一个N行的蛇形矩阵。
+```
+```java
+import java.io.*;
+public class Main{
+    public static void main(String[] args)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str;
+        while((str = br.readLine())!=null){
+            int num = Integer.parseInt(str);
+            StringBuilder sb = new StringBuilder();
+            for(int i = 1; i <= num; i++){
+                int start = (i - 1) * i / 2 + 1;
+                int step = i + 1;
+                for(int j = 1; j <= num - i + 1; j++){
+                    sb.append(start).append(" ");
+                    start += step;
+                    step ++ ;
+                }
+                sb.setCharAt(sb.length()-1,'\n');
+            }
+            sb.deleteCharAt(sb.length()-1);
+            System.out.println(sb.toString());
+        }
+    }
+}
+```
+
+36. 字符串加密
+```
+题目描述
+有一种技巧可以对数据进行加密，它使用一个单词作为它的密匙。下面是它的工作原理：首先，选择一个单词作为密匙，如TRAILBLAZERS。如果单词中包含有重复的字母，只保留第1个，其余几个丢弃。现在，修改过的那个单词属于字母表的下面，如下所示：
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+T R A I L B Z E S C D F G H J K M N O P Q U V W X Y
+上面其他用字母表中剩余的字母填充完整。在对信息进行加密时，信息中的每个字母被固定于顶上那行，并用下面那行的对应字母一一取代原文的字母(字母字符的大小写状态应该保留)。因此，使用这个密匙，Attack AT DAWN(黎明时攻击)就会被加密为Tpptad TP ITVH。
+请实现下述接口，通过指定的密匙和明文得到密文。
+输入描述:
+    先输入key和要加密的字符串
+输出描述:
+    返回加密后的字符串
+```
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Main {
+ 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String key;
+        while ((key = br.readLine()) != null) {
+            char[] chars = key.toLowerCase().toCharArray();
+            char[] dict = new char[26];
+            int index = 0;
+            tag1:
+            for (char ch : chars) {
+                for (int i = 0; i < index; i++) {
+                    if (ch == dict[i]) {
+                        continue tag1;
+                    }
+                }
+                dict[index] = ch;
+                index++;
+            }
+ 
+            char ch = 'a';
+            tag2:
+            for (int i = 0; i < 26; i++) {
+                for (int j = 0; j < index; j++) {
+                    if (dict[j] == ch) {
+                        ch++;
+                        continue tag2;
+                    }
+                }
+                dict[index] = ch;
+                ch++;
+                index++;
+            }
+ 
+            String str = br.readLine();
+            char[] res = str.toCharArray();
+            for (int i = 0; i < res.length; i++) {
+                if(res[i] - 'a'>=0){
+                    res[i] = dict[res[i] - 'a'];
+                }else{
+                    res[i] = dict[res[i] - 'A'];
+                }
+                
+            }
+ 
+            System.out.println(String.valueOf(res));
+        }
     }
 }
 ```
