@@ -26,6 +26,10 @@
     - 24、反转链表
     - 25、合并两个排序的链表
     - 52、两个链表的第一个公共节点
+- [动态规划](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/DynamicProgramming.java)
+    - 1. 整数拆分（多少种分法）
+    - 2. 整数拆分（最大乘积）
+    - 3. 青蛙过河
 
 [目录](#目录)
 
