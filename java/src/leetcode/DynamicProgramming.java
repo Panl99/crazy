@@ -15,6 +15,8 @@ import java.util.Set;
  * 1. 整数拆分（多少种分法）
  * 2. 整数拆分（最大乘积）
  * 3. 青蛙过河
+ * 4. 斐波那切数列第n项
+ * 5. 青蛙跳台阶问题分析（实质上就是斐波那切数列）
  **/
 public class DynamicProgramming {
     public static void main(String[] args) {
@@ -26,6 +28,9 @@ public class DynamicProgramming {
             int temp = integerBreak(n, m);
             System.out.print(temp);
         }
+
+        //斐波那切数列第n项
+        System.out.println(fibonacci(scanner.nextInt()));
     }
     /**
      * 标签：动态规划
@@ -187,5 +192,44 @@ public class DynamicProgramming {
         }
         return map.get(stones[stones.length - 1]).size() > 0;
     }
+
+    /**
+     * 求斐波那切数列第n项
+     * 斐波那切数列公式：
+     *      f(n) = 0；n=0时
+     *      f(n) = 1；n=1时
+     *      f(n) = f(n-1) + f(n-2)；n>=1时
+     */
+    public static long fibonacci(int n) {
+        long fibOne = 1;
+        long fibTwo = 0;
+        long fibN = 0;
+
+        int[] init = {0,1};
+        if (n < 2) {
+            return init[n];
+        }
+
+        for (int i = 2; i <= n; i++) {
+//            System.out.println("fibN = "+fibN +",fibTwo = "+fibTwo +",fibOne = "+fibOne);
+            fibN = fibOne + fibTwo;
+            fibTwo = fibOne;
+            fibOne = fibN;
+
+        }
+        return fibN;
+    }
+    /**
+     * 青蛙跳台阶问题
+     * 描述：一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个n级台阶总共多少种跳法？
+     * 思路：
+     *      n=1；1种跳法。
+     *      n=2；2种跳法。1+1、2
+     *      假设n级台阶跳法数为f(n)，n>2时，第一次跳就分两种情况：
+     *              第一次跳1级；后面剩下n-1级台阶跳法数就为：f(n-1)
+     *              第一次跳2级；后面剩下n-2级台阶跳法数就为：f(n-2)
+     *      因此，n级台阶跳法数和为：f(n) = f(n-1) + f(n-2)
+     *      实质上就是上边的斐波那切数列了
+     */
 
 }
