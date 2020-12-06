@@ -13,26 +13,29 @@
 # leetcode
 - [前K个高频元素](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TopkFrequentElements.java)
 - [数组](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/ArrayDemo.java)
-    - 4、二维数组中查找目标值（从右上角开始查找）
-    - 子集(位运算)
+    - 4、二维数组中查找目标值（从右上角开始查找）√
+    - 子集(位运算) √
+- [字符串](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StringDemo.java)
+    - 替换空格 √
+- [栈、队列](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StackQueueDemo.java)
+    - 用两个栈实现一个队列 √
 - [树](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TreeDemo.java)
-    - 左叶子之和（递归）
-    - 二叉树的层次遍历（广度优先遍历，队列、迭代）
-    - 翻转二叉树（递归）
+    - 左叶子之和（递归）√
+    - 二叉树的层次遍历（广度优先遍历，队列、迭代）√
+    - 翻转二叉树（递归）√
 - [链表](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/ListDemo.java)
-    - 6、从尾到头打印链表(栈、递归)
-    - TODO
+    - 6、从尾到头打印链表(栈、递归) √
     - 18、删除链表的节点
     - 22、链表中倒数第k个节点
     - 24、反转链表
     - 25、合并两个排序的链表
     - 52、两个链表的第一个公共节点
 - [动态规划](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/DynamicProgramming.java)
-    - 1. 整数拆分（多少种分法）
-    - 2. 整数拆分（最大乘积）
-    - 3. 青蛙过河
-    - 4. 斐波那切数列第n项
-    - 5. 青蛙跳台阶问题分析（实质上就是斐波那切数列）
+    - 1. 整数拆分（多少种分法）√
+    - 2. 整数拆分（最大乘积）√
+    - 3. 青蛙过河 √
+    - 4. 斐波那切数列第n项 √
+    - 5. 青蛙跳台阶问题分析（实质上就是斐波那切数列）√
 
 [目录](#目录)
 

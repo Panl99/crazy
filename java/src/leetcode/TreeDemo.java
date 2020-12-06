@@ -8,6 +8,14 @@ import java.util.Queue;
 /**
  * @create 2020/9/7 21:51
  * @auther outman
+ * 二叉树：[a,b,c,d,e,f,g,null,null,h,i,null,null,null,null]
+ *          a
+ *      b       c
+ *    d   e   f   g
+ *       h i
+ *   先序遍历：{a,b,d,e,h,i,c,f,g} /_
+ *   中序遍历：{d,b,h,e,i,a,f,c,g} /\
+ *   后序遍历：{d,h,i,e,b,f,g,c,a} _\
  **/
 public class TreeDemo {
     public static void main(String[] args) {
