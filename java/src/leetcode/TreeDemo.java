@@ -62,6 +62,13 @@ public class TreeDemo {
         invertTreeList.add(resTree.right.left.val);
         invertTreeList.add(resTree.right.right.val);
         System.out.println(invertTreeList);
+
+        // 后序遍历二叉树 [9, 15, 7, 20, 3]
+        System.out.println(postorderTraversal(tree));
+        // 前序遍历二叉树 [3, 9, 20, 15, 7]
+        System.out.println(preorderTraversal(tree));
+        // 中序遍历二叉树 [9, 3, 15, 20, 7]
+        System.out.println(inorderTraversal(tree));
     }
 
     /**
@@ -224,5 +231,73 @@ public class TreeDemo {
         return root;
     }
 
+    /**
+     * 145. 二叉树的后序遍历
+     * 描述：给定一个二叉树，返回它的后序遍历。
+     * 示例：                      1
+     *      输入：[1,null,2,3]        2
+     *      输出：[3,2,1]           3
+     * 思路：后序遍历顺序：左子树——右子树——根节点
+     *      递归：postorder(root) 表示当前遍历到 root 节点的答案。按照定义，我们只要递归调用 postorder(root->left) 来遍历 root 节点的左子树，然后递归调用 postorder(root->right) 来遍历 root 节点的右子树，最后将 root 节点的值加入答案即可，递归终止的条件为碰到空节点。
+     *
+     */
+    public static List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        postorder(root, res);
+        return res;
+    }
+    public static void postorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        postorder(root.left, res);
+        postorder(root.right, res);
+        res.add(root.val);
+    }
+    /**
+     * 144. 二叉树的前序遍历
+     * 描述：给定一个二叉树，返回它的前序遍历。
+     * 示例：                      1
+     *      输入：[1,null,2,3]        2
+     *      输出：[1,2,3]           3
+     * 思路：前序遍历顺序：根节点——左子树——右子树
+     *      递归：
+     *
+     */
+    public static List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        preorder(root, res);
+        return res;
+    }
+    public static void preorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        res.add(root.val);
+        preorder(root.left, res);
+        preorder(root.right, res);
+    }
+    /**
+     * 94. 二叉树的中序遍历
+     * 描述：给定一个二叉树，返回它的中序遍历。
+     * 示例：                      1
+     *      输入：[1,null,2,3]        2
+     *      输出：[1,2,3]           3
+     * 思路：中序遍历顺序：左子树——根节点——右子树
+     *      递归：
+     */
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        inorder(root, res);
+        return res;
+    }
+    public static void inorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, res);
+        res.add(root.val);
+        inorder(root.right, res);
+    }
 
 }

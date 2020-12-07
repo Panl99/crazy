@@ -17,12 +17,14 @@
     - 子集(位运算) √
 - [字符串](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StringDemo.java)
     - 替换空格 √
+    - Z字型变换 √
 - [栈、队列](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StackQueueDemo.java)
     - 用两个栈实现一个队列 √
 - [树](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TreeDemo.java)
     - 左叶子之和（递归）√
     - 二叉树的层次遍历（广度优先遍历，队列、迭代）√
     - 翻转二叉树（递归）√
+    - 二叉树后序、前序、中序遍历（递归）√
 - [链表](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/ListDemo.java)
     - 6、从尾到头打印链表(栈、递归) √
     - 18、删除链表的节点
@@ -36,6 +38,8 @@
     - 3. 青蛙过河 √
     - 4. 斐波那切数列第n项 √
     - 5. 青蛙跳台阶问题分析（实质上就是斐波那切数列）√
+- [排序](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/SortDemo.java)
+    - 磁盘容量大小排序 √
 
 [目录](#目录)
 
