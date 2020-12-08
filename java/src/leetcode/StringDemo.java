@@ -16,6 +16,10 @@ public class StringDemo {
         // Z字型变换
         String str = "ABCDEFGHIJK";
         System.out.println(convert(str, 3));
+
+        // 判断是否是子序列
+        System.out.println(isSubsequence2("abc", "ahbgdc"));  //true
+        System.out.println(isSubsequence2("axc", "ahbgdc"));  //false
     }
 
     /**
@@ -96,6 +100,67 @@ public class StringDemo {
         }
         System.out.println(rows);
         return res.toString();
+    }
+
+    /**
+     * 392. 判断子序列
+     * 描述：给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
+     *      字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+     * 示例：
+     *      输入：s = "abc", t = "ahbgdc"
+     *      输出：true
+     *
+     *      输入：s = "axc", t = "ahbgdc"
+     *      输出：false
+     * 思路：
+     *      双指针(贪心算法)：初始化两个指针 i和j，分别指向 s和t 的初始位置。每次贪心地匹配，匹配成功则i和j同时右移，匹配 s的下一个位置，匹配失败则 j 右移，i不变，尝试用 t的下一个字符匹配 s。
+     * 时间复杂度：O(m+n)；空间复杂度：O(1)
+     */
+    public static boolean isSubsequence(String s, String t) {
+        if (s == null || t == null) {
+            return false;
+        }
+
+        int sLen = s.length();
+        int tLen = t.length();
+        if (sLen > tLen) {
+            return false;
+        }
+        int i = 0, j = 0;
+        while (i < sLen && j < tLen) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == sLen;
+    }
+    // 其他方式
+    public static boolean isSubsequence2(String s, String t) {
+        if (s == null || t == null) {
+            return false;
+        }
+        int sLen = s.length();
+        int tLen = t.length();
+        if (sLen > tLen) {
+            return false;
+        }
+        char[] chars = s.toCharArray();
+        int i = 0;
+        boolean flag = false;
+        StringBuilder sb = new StringBuilder(t);
+        while (!flag) {
+            if (sb.toString().contains(String.valueOf(chars[i]))) {
+                sb.delete(0, sb.indexOf(String.valueOf(chars[i]))+1);
+                ++i;
+            } else {
+                break;
+            }
+            if (i == sLen) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 }
 

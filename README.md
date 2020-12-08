@@ -18,6 +18,7 @@
 - [字符串](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StringDemo.java)
     - 替换空格 √
     - Z字型变换 √
+    - 判断是否是子序列 √
 - [栈、队列](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StackQueueDemo.java)
     - 用两个栈实现一个队列 √
 - [树](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TreeDemo.java)
