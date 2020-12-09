@@ -41,6 +41,11 @@
     - 5. 青蛙跳台阶问题分析（实质上就是斐波那切数列）√
 - [排序](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/SortDemo.java)
     - 磁盘容量大小排序 √
+    - 二分查找 √
+    - 冒泡排序 √
+    - 插入排序 √
+    - 快速排序 √
+    - 希尔排序 归并排序 桶排序 基数排序 ×
 
 [目录](#目录)
 
