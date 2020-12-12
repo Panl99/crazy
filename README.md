@@ -17,6 +17,7 @@
     - 4、二维数组中查找目标值（从右上角开始查找）√
     - 子集(位运算) √
     - 数组走到最后最小步数 √
+    - 最大数（数组排序比较） √
 - [字符串](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StringDemo.java)
     - 替换空格 √
     - Z字型变换 √
@@ -51,6 +52,7 @@
     - 希尔排序 归并排序 桶排序 基数排序 ×
 - [其他](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/OtherDemo.java)
     - 一个整数分解成两个质数和 √
+    - 数据分类(int转16进制) √
 
 [目录](#目录)
 

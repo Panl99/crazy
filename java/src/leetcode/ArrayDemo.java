@@ -1,7 +1,10 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @create 2020/9/17 22:04
@@ -27,6 +30,12 @@ public class ArrayDemo {
 
         //最少步数
         System.out.println(minStept());
+
+        //最大数
+        largestNumber();
+        //方法2
+        largestNumber(new int[]{3,30,34,5,9});
+
     }
     /**
      * 标签：数组
@@ -158,4 +167,79 @@ public class ArrayDemo {
         }
         return -1;
     }
+
+    /**
+     * 179. 最大数
+     * 给定一组非负整数 nums，重新排列它们每个数字的顺序（每个数字不可拆分）使之组成一个最大的整数。
+     * 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+     * 示例 1：
+     *      输入：nums = [10,2]
+     *      输出："210"
+     * 示例 2：
+     *      输入：nums = [3,30,34,5,9]
+     *      输出："9534330"
+     */
+    public static void largestNumber() {
+        Scanner in = new Scanner(System.in);
+        String strs = in.nextLine();
+        String[] nums = strs.split(" ");
+        int len = nums.length;
+        int tmp;
+        while (len != 0) {
+            for (int j = 1; j < len; j++) {
+                if (exchange(Integer.parseInt(nums[j - 1]), Integer.parseInt(nums[j]))) {
+                    tmp = Integer.parseInt(nums[j - 1]);
+                    nums[j - 1] = nums[j];
+                    nums[j] = String.valueOf(tmp);
+                }
+            }
+            len--;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String a : nums) {
+            sb.append(a);
+        }
+        System.out.println(sb);
+
+    }
+    public static boolean exchange(int a, int b) {
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append(a).append(b);
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append(b).append(a);
+        int m1 = Integer.parseInt(sb1.toString());
+        int m2 = Integer.parseInt(sb2.toString());
+        if (m1 < m2){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    //方法2 leetcode官解
+    public static String largestNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strs, new LargerNumberComparator());
+        if (strs[0].equals("0")) {
+            return "0";
+        }
+        String str = new String();
+        for (String numAsStr : strs) {
+            str += numAsStr;
+        }
+        return str;
+    }
+    private static class LargerNumberComparator implements Comparator<String> {
+        @Override
+        public int compare(String a, String b) {
+            String order1 = a + b;
+            String order2 = b + a;
+            return order2.compareTo(order1);
+        }
+    }
+
+
 }
