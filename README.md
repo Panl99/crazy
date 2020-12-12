@@ -13,12 +13,15 @@
 # leetcode
 - [前K个高频元素](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TopkFrequentElements.java)
 - [数组](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/ArrayDemo.java)
+    - 打印不重复元素 √
     - 4、二维数组中查找目标值（从右上角开始查找）√
     - 子集(位运算) √
+    - 数组走到最后最小步数 √
 - [字符串](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StringDemo.java)
     - 替换空格 √
     - Z字型变换 √
     - 判断是否是子序列 √
+    - 字符串的排列组合 √
 - [栈、队列](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/StackQueueDemo.java)
     - 用两个栈实现一个队列 √
 - [树](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/TreeDemo.java)
@@ -46,6 +49,8 @@
     - 插入排序 √
     - 快速排序 √
     - 希尔排序 归并排序 桶排序 基数排序 ×
+- [其他](https://github.com/Panl99/leetcode/tree/master/java/src/leetcode/OtherDemo.java)
+    - 一个整数分解成两个质数和 √
 
 [目录](#目录)
 

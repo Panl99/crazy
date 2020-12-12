@@ -14,6 +14,9 @@ public class ArrayDemo {
 
         // 找出数组中重复数字
 
+        //打印不重复元素
+        System.out.println(getNum());
+
 
         // 二维数组中查找目标值
         System.out.println(findTarget(matrix, 7)); //true
@@ -22,6 +25,8 @@ public class ArrayDemo {
         // 子集
         System.out.println(subsets(nums));
 
+        //最少步数
+        System.out.println(minStept());
     }
     /**
      * 标签：数组
@@ -32,6 +37,29 @@ public class ArrayDemo {
      * 思路：可以使用数组下标定位元素
      *      使用哈希表的话，时间复杂度：O(n)；空间复杂度：O(n)。
      */
+
+    /**
+     * 任给一个数组，其中只有一个元素是单独出现，其他是成对出现，输出单独的元素。
+     *     例如： 输入： {2,2,1,1,4,4,7}
+     *     输出：7
+     */
+    public static int[] getNum() {
+        int[] nums = {2,2,1,1,5,4,4,7};
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (! res.contains(nums[i])) {
+                res.add(nums[i]);
+            } else {
+                res.remove(Integer.valueOf(nums[i]));
+                continue;
+            }
+
+        }
+        for (int i : res) {
+            System.out.print(i + " ");
+        }
+        return res.stream().mapToInt(Integer::valueOf).toArray();
+    }
 
     /**
      * 标签：数组
@@ -95,4 +123,39 @@ public class ArrayDemo {
         return ans;
     }
 
+    /**
+     * 描述：给定一个正整数数组，最大为100个成员，从第一个成员开始，走到数组最后一个成员最少的步骤数。
+     *      第一步必须从第一元素开始，1<=步长<len/2, 第二步开始以所在成员的数字走相应的步数，如果目标不可达返回-1，只输出最少的步骤数
+     * 输入：7 5 9 4 2 6 8 3 5 4 3 9
+     * 输出：2
+     */
+    public static int minStept() {
+        int[] nums = {7 ,5 ,9 ,4 ,2 ,6 ,8 ,3 ,5 ,4 ,3 ,9};
+//        int[] nums = {3, 3, 8, 2, 4, 1, 6};
+        int len = nums.length;
+        int res = len/2;
+        for (int i = 1; i <= len/2; i++) {
+            int step = 1 + i + nums[i];
+            int count = getCount(nums, step, len, 2);
+            if (-1 == count) {
+                continue;
+            } else if (count == 2){
+                return count;
+            }
+
+            if (res > count) {
+                res = count;
+            }
+        }
+        return res;
+    }
+    public static int getCount(int[] nums, int step, int len, int count) {
+        if (step < len){
+            count++;
+            getCount(nums,step + nums[step - 1], len, count);
+        } else if (step == len) {
+            return count;
+        }
+        return -1;
+    }
 }
