@@ -98,6 +98,7 @@ public class SortDemo {
      *      第3趟：[3,2,1,4,5,6]
      *      第4趟：[2,1,3,4,5,6]
      *      第5趟：[1,2,3,4,5,6]
+     * 时间复杂度：`O(N^2)`
      */
     public static int[] bubbleSort(int[] nums) {
         // 外层循环控制轮数
@@ -118,6 +119,49 @@ public class SortDemo {
     }
 
     /**
+     * 选择排序
+     * 原理：从左至右检查数组的每个格子，找出值最小的那个。在此过程中，我们会用一个变量来记住检查过的数字的最小值（事实上记住的是索引，但为了看起来方便，下图就直接写出数值）。如果一个格子中的数字比记录的最小值还要小，就把变量改成该格子的索引
+     *      知道哪个格子的值最小之后，将该格与本次检查的起点交换。第1 次检查的起点是索引0，第2 次是索引1，以此类推。
+     *      重复第(1) (2)步，直至数组排好序。
+     * 示例：[2, 6, 1, 3]
+     *      第一趟：先从2开始跟后相邻比较，得到1是最小后，跟2交换位置：[1, 6, 2, 3]
+     *      第二趟：从6开始跟后边相邻比较，得到2最小，交换位置：[1, 2, 6, 3]
+     *      第三趟：[1, 2, 3, 6]
+     * 时间复杂度：`O(N^2)`
+     */
+    public static int[] SelectSort(int[] nums) {
+        // 外层循环控制轮数
+        for (int i = 0; i < nums.length; i++) {
+            // 最小值的索引
+            int lowestNumberIndex = i;
+            // 内层循环控制每趟比较
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] < nums[lowestNumberIndex]) {
+                    lowestNumberIndex = j;
+                }
+            }
+
+            if (lowestNumberIndex != i) {
+                int temp = nums[i];
+                nums[i] = nums[lowestNumberIndex];
+                nums[lowestNumberIndex] = temp;
+            }
+
+            // 打印下每趟排序
+            for (int m = 0; m < nums.length; m++) {
+                System.out.print(nums[m] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.print("选择排序最终结果：");
+        for (int i = 0; i < nums.length; i++) {
+            System.out.print(nums[i] + " ");
+        }
+        return nums;
+    }
+
+    /**
      * 插入排序
      * 原理：将序列分为两个子序列，L默认拿第一个数，然后每次从R中拿一个插入L中从右到左比自己大的后边，将L中比自己大的整体后移，L序总是有序的。
      * 将一个数据插入已经拍好序的序列中，适用于少量数据排序，稳定。
@@ -129,6 +173,7 @@ public class SortDemo {
      *      第3趟：L：[ 2, 5, 6 ]；      R：[7, 8 ]
      *      第4趟：L：[ 2, 5, 6, 7 ]；   R：[ 8 ]
      *      第5趟：L：[ 6, 2, 5, 7, 8 ]；R：[ ]
+     * 时间复杂度：`O(N^2)`
      */
     public static int[] insertSort(int[] nums) {
         for (int i = 1; i < nums.length; i++) {
@@ -142,7 +187,14 @@ public class SortDemo {
                 index--;
             }
             nums[index + 1] = insertVal;
+
+            // 打印下每趟排序
+            for (int m = 0; m < nums.length; m++) {
+                System.out.print(nums[m] + " ");
+            }
+            System.out.println();
         }
+        System.out.print("插入排序最终结果：");
         for (int i = 0; i < nums.length; i++) {
             System.out.print(nums[i] + " ");
         }
